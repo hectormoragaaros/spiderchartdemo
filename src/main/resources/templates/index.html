@@ -48,6 +48,9 @@ canvas {
 			</div>
 		</div>
 	</div>
+	<script th:inline="javascript">
+		var dndChar=/*[[${dnd_character}]]*/null;
+	</script>
 	<script type="text/javascript">
 		var marksCanvas = document.getElementById("marksChart");
 
@@ -58,11 +61,11 @@ canvas {
 		var marksData = {
 			labels : [ "Strength", "Dextery", "Constitution", "Intelligence", "Wisdom", "Charisma" ],
 			datasets : [ {
-				label : "Martha",
+				label : (dndChar!==null)?dndChar.characterType:"None",
 				backgroundColor : "#FFF17644",
 				borderColor : "black",
 				borderWidth : 1,
-				data : [ 65, 75, 70, 80, 60, 80 ]
+				data : (dndChar!==null)?[ dndChar.strength, dndChar.dextery, dndChar.constitution, dndChar.intelligence, dndChar.wisdom, dndChar.charisma]:[]
 			} ]
 		};
 
@@ -71,7 +74,7 @@ canvas {
 				title : {
 					display : true,
 					align : "start",
-					text : "Comparing Student Performance"
+					text : "Caracteristicas del Personaje"
 				},
 				legend : {
 					align : "start"
